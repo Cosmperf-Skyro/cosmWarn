@@ -52,3 +52,4 @@ net.Receive("cosmWarn:Delete", function(len, ply)
     sql.Query("DELETE FROM WarnSystem WHERE warn_id=".. id .."")
 end)
 
+
