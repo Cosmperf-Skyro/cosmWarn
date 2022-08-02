@@ -19,7 +19,7 @@ net.Receive("cosmWarn:SubmitWarn", function(len, adminWarn)
         DarkRP.notify(adminWarn, 1, 3, "Vous devez renseigner toutes les informations")
     end
 
-    sql.Query("INSERT INTO WarnSystem( warn_id, Craison , desc, player_warn , adminWarn ) VALUES( NULL, '".. Craison .. "','" .. desc .. "','" .. pl .. "','" .. warn_date .. "')")
+    sql.Query("INSERT INTO WarnSystem( warn_id, Craison , desc, player_warn , adminWarn ) VALUES( NULL, '".. sql.SQLStr(Craison) .. "','" .. sql.SQLStr(desc) .. "','" .. sql.SQLStr(pl) .. "','" .. warn_date .. "')")
 
     net.Start("cosmWarn:EmitWarn")
     net.WriteString(Craison)
@@ -32,7 +32,7 @@ end)
 
 net.Receive("cosmWarn:GetWarn", function(len, ply)
     local pl = net.ReadString()
-    local steamid = sql.Query("SELECT warn_id, Craison , desc, player_warn , adminWarn FROM WarnSystem WHERE player_warn='".. pl .."'")
+    local steamid = sql.Query("SELECT warn_id, Craison , desc, player_warn , adminWarn FROM WarnSystem WHERE player_warn='".. sql.SQLStr(pl) .."'")
     net.Start("cosmWarn:Send")
 
     net.WriteUInt(#steamid, 15)
