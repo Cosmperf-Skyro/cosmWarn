@@ -4,18 +4,20 @@ util.AddNetworkString("cosmWarn:GetWarn")
 util.AddNetworkString("cosmWarn:Send")
 util.AddNetworkString("cosmWarn:Delete")
 
+sql.Query("CREATE TABLE WarnSystem(warn_id INTEGER PRIMARY KEY AUTOINCREMENT, Craison TEXT, desc TEXT, player_warn TEXT, adminWarn TEXT)")
+
+
 net.Receive("cosmWarn:SubmitWarn", function(len, adminWarn)
-    Craison = net.ReadString()
-    desc = net.ReadString()
-    pl = net.ReadString()
-    warn_date = os.date("%Hh:%Mm - %b/%a/%Y", os.time())
+    local Craison = net.ReadString()
+    local desc = net.ReadString()
+    local pl = net.ReadString()
+    local warn_date = os.date("%Hh:%Mm - %b/%a/%Y", os.time())
 
 
     if (Craison == "" or desc == "") then
         DarkRP.notify(adminWarn, 1, 3, "Vous devez renseigner toutes les informations")
     end
 
-    sql.Query("CREATE TABLE WarnSystem(warn_id INTEGER PRIMARY KEY AUTOINCREMENT, Craison TEXT, desc TEXT, player_warn TEXT, adminWarn TEXT)")
     sql.Query("INSERT INTO WarnSystem( warn_id, Craison , desc, player_warn , adminWarn ) VALUES( NULL, '".. Craison .. "','" .. desc .. "','" .. pl .. "','" .. warn_date .. "')")
 
     net.Start("cosmWarn:EmitWarn")

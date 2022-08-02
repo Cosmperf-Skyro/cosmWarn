@@ -11,7 +11,7 @@ net.Receive("cosmWarn:Send", function(len, ply)
         warns[#warns +1] = {Craison, date, desc, id}
 
 
-        local panel_warn = vgui.Create("DPanel", scroll_warn)
+        local panel_warn = vgui.Create("DPanel",  cosmWarn.scroll_warn)
         panel_warn:SetSize(respW(800), respH(120)) 
         panel_warn:Dock(TOP)
         panel_warn:DockMargin(0,0,0,respH(5))   

@@ -8,26 +8,27 @@ hook.Add( "OnPlayerChat", "cosmWarn:WarnMenu", function( ply, strText, bTeam, bD
 	if ( strText == cosmWarn.Config.Command ) then -- if the player typed /hello then
 
         if cosmWarn.Config.Admin[LocalPlayer():GetUserGroup()] then
-        main = vgui.Create("TLFrame")    
-        local allPlayer = vgui.Create("TLScroll", main)
-        warn_panel = vgui.Create("DPanel", main)
-        local warn_avatar = vgui.Create("AvatarImage", warn_panel)
-        local add_warn = vgui.Create("TLButton", warn_panel)
+            
+        cosmWarn.main = vgui.Create("TLFrame")    
+        cosmWarn.allPlayer = vgui.Create("TLScroll", cosmWarn.main)
+        cosmWarn.warn_panel = vgui.Create("DPanel", cosmWarn.main)
+        cosmWarn.warn_avatar = vgui.Create("AvatarImage", cosmWarn.warn_panel)
+        cosmWarn.add_warn = vgui.Create("TLButton", cosmWarn.warn_panel)
 
 
 
-        main:SetSize(respW(1200), respH(700))
-        main:Center()
-        main:MakePopup()
-        main:SetDraggable(false)
-        main:ShowCloseButton(true)
-        main:SetHeader("COSMWARN - CASIER DES WARNS")
+        cosmWarn.main:SetSize(respW(1200), respH(700))
+        cosmWarn.main:Center()
+        cosmWarn.main:MakePopup()
+        cosmWarn.main:SetDraggable(false)
+        cosmWarn.main:ShowCloseButton(true)
+        cosmWarn.main:SetHeader("COSMWARN - CASIER DES WARNS")
 
-        allPlayer:SetSize(respW(300), respH(600))
-        allPlayer:SetPos(respW(10), respH(70))
+        cosmWarn.allPlayer:SetSize(respW(300), respH(600))
+        cosmWarn.allPlayer:SetPos(respW(10), respH(70))
 
         for k, v in pairs(player.GetAll()) do
-            local btnPlayer = vgui.Create("TLButton", allPlayer)
+            local btnPlayer = vgui.Create("TLButton", cosmWarn.allPlayer)
             btnPlayer:SetSize(respW(250), respH(50))
             btnPlayer:Dock(TOP)
             btnPlayer:DockMargin(0,0,0,respH(5))
@@ -57,17 +58,17 @@ hook.Add( "OnPlayerChat", "cosmWarn:WarnMenu", function( ply, strText, bTeam, bD
 
 
 
-                    warn_avatar:SetSize(respW(64), respH(64))
-                    warn_avatar:SetPos(respW(10), respH(10))
-                    warn_avatar:SetPlayer(v, 64)
+                    cosmWarn.warn_avatar:SetSize(respW(64), respH(64))
+                    cosmWarn.warn_avatar:SetPos(respW(10), respH(10))
+                    cosmWarn.warn_avatar:SetPlayer(v, 64)
 
-                    add_warn:SetSize(respW(300), respH(50))
-                    add_warn:SetPos(respW(480), respH(10))
-                    add_warn:SetText("Ajouter un avertissement")
+                    cosmWarn.add_warn:SetSize(respW(300), respH(50))
+                    cosmWarn.add_warn:SetPos(respW(480), respH(10))
+                    cosmWarn.add_warn:SetText("Ajouter un avertissement")
 
-                    scroll_warn = vgui.Create("TLScroll", warn_panel)
-                    scroll_warn:SetSize(respW(700), respH(500))
-                    scroll_warn:SetPos(respW(10), respH(120))
+                    cosmWarn.scroll_warn = vgui.Create("TLScroll", cosmWarn.warn_panel)
+                    cosmWarn.scroll_warn:SetSize(respW(700), respH(500))
+                    cosmWarn.scroll_warn:SetPos(respW(10), respH(120))
 
 
 
