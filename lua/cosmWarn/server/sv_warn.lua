@@ -15,11 +15,14 @@ net.Receive("cosmWarn:SubmitWarn", function(len, adminWarn)
     local warn_date = os.date("%Hh:%Mm - %b/%a/%Y", os.time())
 
 
-    if (Craison == "" or desc == "") then
+    if (Craison == "Choisir une raison" or desc == "") then
         DarkRP.notify(adminWarn, 1, 3, "Vous devez renseigner toutes les informations")
+        return
+        print("test")
     end
 
     sql.Query("INSERT INTO WarnSystem( warn_id, Craison , desc, player_warn , adminWarn ) VALUES( NULL, '".. sql.SQLStr(Craison) .. "','" .. sql.SQLStr(desc) .. "','" .. sql.SQLStr(pl) .. "','" .. warn_date .. "')")
+    print("test")
 
     net.Start("cosmWarn:EmitWarn")
     net.WriteString(Craison)
@@ -33,6 +36,7 @@ end)
 net.Receive("cosmWarn:GetWarn", function(len, ply)
     local pl = net.ReadString()
     local steamid = sql.Query("SELECT warn_id, Craison , desc, player_warn , adminWarn FROM WarnSystem WHERE player_warn='".. sql.SQLStr(pl) .."'")
+    PrintTable(steamid)
     net.Start("cosmWarn:Send")
 
     net.WriteUInt(#steamid, 15)

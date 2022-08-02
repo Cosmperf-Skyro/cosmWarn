@@ -35,9 +35,11 @@ hook.Add( "OnPlayerChat", "cosmWarn:WarnMenu", function( ply, strText, bTeam, bD
             btnPlayer:SetText(v:Name())
             
             function btnPlayer:DoClick()
+                if cosmWarn.Config.Admin[LocalPlayer():GetUserGroup()] then
                 net.Start("cosmWarn:GetWarn")
                     net.WriteString(v:SteamID())
                 net.SendToServer()
+
 
 
 
@@ -78,6 +80,7 @@ hook.Add( "OnPlayerChat", "cosmWarn:WarnMenu", function( ply, strText, bTeam, bD
                     
 
                         function add_warn:DoClick()
+                            if cosmWarn.Config.Admin[LocalPlayer():GetUserGroup()] then
                             local panel_warn = vgui.Create("TLFrame")
                             panel_warn:SetSize(respW(700), respH(400))
                             panel_warn:Center()
@@ -107,6 +110,7 @@ hook.Add( "OnPlayerChat", "cosmWarn:WarnMenu", function( ply, strText, bTeam, bD
                             submit:SetText("Soumettre l'avertissement")
 
                             function submit:DoClick()
+                                if cosmWarn.Config.Admin[LocalPlayer():GetUserGroup()] then
                                 net.Start("cosmWarn:SubmitWarn")
                                     net.WriteString(Craison:GetValue())
                                     net.WriteString(desc:GetValue())
@@ -114,12 +118,13 @@ hook.Add( "OnPlayerChat", "cosmWarn:WarnMenu", function( ply, strText, bTeam, bD
                                 net.SendToServer()
                                 panel_warn:Close()
                                 main:Close()
+                                end
                             end
 
                             
-
                         end
-
+                        end
+                end
             end
 
         end

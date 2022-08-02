@@ -31,10 +31,12 @@ net.Receive("cosmWarn:Send", function(len, ply)
         delete_warn:SetText("Supprimer")
 
         function delete_warn:DoClick()
+            if cosmWarn.Config.Admin[LocalPlayer():GetUserGroup()] then
             net.Start("cosmWarn:Delete")
                 net.WriteInt(id, 6)
             net.SendToServer()
             main:Close()
+            end
         end
 
 
