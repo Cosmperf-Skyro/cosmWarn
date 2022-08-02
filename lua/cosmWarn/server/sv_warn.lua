@@ -4,8 +4,9 @@ util.AddNetworkString("cosmWarn:GetWarn")
 util.AddNetworkString("cosmWarn:Send")
 util.AddNetworkString("cosmWarn:Delete")
 
+hook.Add("Initialize", "cosmWarn:InitializeDB", function()
 sql.Query("CREATE TABLE WarnSystem(warn_id INTEGER PRIMARY KEY AUTOINCREMENT, Craison TEXT, desc TEXT, player_warn TEXT, adminWarn TEXT)")
-
+end)
 
 net.Receive("cosmWarn:SubmitWarn", function(len, adminWarn)
     local Craison = net.ReadString()
